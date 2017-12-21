@@ -1,0 +1,309 @@
+/*
+================================================================================
+|                                     HEADER                                   |
+================================================================================
+*/
+header{
+	width:100%;
+	min-width: $min-width;	
+	order: 1;	
+    -webkit-order: 1;	
+    backface-visibility: hidden;
+    transition: all 0.5s;
+    &.active{
+        background: rgb(245, 245, 245);
+        color: #000;
+    }
+}
+.header-panel{
+    padding: 23px 0 22px;
+    &__content{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+.header-contacts{
+    .btn{
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 16px;
+    }
+    .phone{
+        display: inline-block;
+        vertical-align: middle;
+    }
+}
+.phone{
+    &-number{
+        display: block;
+        font-size: 18px;
+        margin-bottom: 6px;
+        &:last-of-type{
+            margin: 0;
+        }
+    }
+}
+
+.header-nav{
+    background:$brand-color;
+    padding: 33px 0 31px;
+}
+.nav-list{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    &__item{
+        position: relative;
+        padding: 0 48px;
+        &:after{
+            content:'';
+            width: 1px;
+            height: 16px;
+            background:#424757;
+            position: absolute;
+            right: 0;
+            top:50%;
+            transform: translate(0, -50%);
+        }
+        &:last-of-type:after{
+            display: none;
+        }
+    }
+    &__link{
+        border-bottom: 1.5px solid transparent;
+        text-transform: uppercase;
+        font-size: 15px;
+        &:hover{
+            border-color: #afb0b4;
+        }
+    }
+}
+
+// hamburger
+.menu-button {
+    display: none;
+    cursor: pointer;
+    height: 35px;
+    padding: 15px 10px 5px 5px;
+    width: 35px;
+    margin: 0 0 0 10px;
+    span {
+        background: $brand-color;
+        display: block;
+        height: 3px;
+        width: 27px;
+        &:after, 
+        &:before {
+            content: '';
+            background: $brand-color;
+            display: block;
+            height: 3px;
+            position: relative;
+            width: 100%;
+        }
+        &:before {
+            top: -7px;
+        }
+        &:after {
+            top: 5px;
+        }
+    }
+    &.open {
+        z-index: 10000;
+        span{
+            background: transparent;
+        }
+        span:after, 
+        span:before {
+            background: $brand-color;
+            height: 2px;
+            -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+            top: 0;
+        }
+        span:before {
+            top: 1px;
+        }
+        span:after {
+            -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+            top: -1px;
+        }
+    }
+}
+// end hamburger
+
+// pushy
+.pushy {
+    position: fixed;
+    width: 246px;
+    height: 100%;
+    top: 0;
+    z-index: 9999;
+    background: #323232;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+.pushy-left {
+    -webkit-transform: translate3d(-246px, 0, 0);
+    -ms-transform: translate3d(-246px, 0, 0);
+    transform: translate3d(-246px, 0, 0);
+}
+.main-wrapper, 
+.pushy, 
+.push {
+    transition: transform 0.2s cubic-bezier(0.16, 0.68, 0.43, 0.99);
+}
+.pushy.pushy-left {
+    left: 0;
+}
+.pushy-open-left .pushy, 
+.pushy-open-right .pushy {
+    -webkit-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+.pushy-content {
+    transition: visibility 0.2s cubic-bezier(0.16, 0.68, 0.43, 0.99);
+    padding: 80px 15px 10px 25px;
+    font-weight: 300;
+    letter-spacing: 0.3px;
+}
+.pushy-open-left .pushy-content, 
+.pushy-open-right .pushy-content {
+    visibility: visible;
+}
+
+.site-overlay {
+    display: none;
+}
+.pushy-open-left .site-overlay, 
+.pushy-open-right .site-overlay {
+    display: block;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 9998;
+    background-color: rgba(0, 0, 0, 0.5);
+    -webkit-animation: fade 700ms;
+    animation: fade 500ms;
+}
+.pushy-open-left .main-wrapper, 
+.pushy-open-left .push {
+    -webkit-transform: translate3d(200px, 0, 0);
+    -ms-transform: translate3d(200px, 0, 0);
+    transform: translate3d(246px, 0, 0);
+}
+body.ios.pushy-open-left {
+    overflow: hidden;
+    height: 100vh;
+}
+.pushy .menu-button{
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    left: auto;
+    transform: translate(0,0);
+    span{
+        background:#fff;
+        &:before,
+        &:after{
+            background:#fff;
+        }
+    }
+    &.open span{
+        background:transparent;
+    }
+}
+
+.push-nav-list{
+    list-style: none;
+    margin-top: 10px;
+    margin: 10px 0 36px;
+    &__item{
+        margin-bottom: 18px;
+    }
+    &__link{
+        color: #fff;
+    }
+}
+
+@media screen and (max-width: 992px) { 
+    .nav-list{
+        &__link {
+            font-size: 14px;
+        }
+        &__item {
+            padding: 0 25px;
+        }
+    }
+}
+
+@media screen and (max-width: 768px) { 
+    .menu-button{
+        display: inline-block;
+        vertical-align: middle;
+    }
+    .header-nav{
+        display: none;
+    }
+    .nav-list{
+        display: block;
+        &__item{
+            margin: 0 0px 45px;
+            padding: 0;
+            &:after{
+                display: none;
+            }
+        }
+        &__link{
+            position: relative;
+            padding: 0 0 5px;
+            display: inline-block;
+            &:after{
+                content:'';
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 30px;
+                height: 2px;
+                background: #424757;
+                transition: .8s;
+            }
+            &:hover{
+                border-color: transparent;
+                &:after{
+                    background:#8c91a0;
+                }
+            }
+        }
+    }
+    .logo{
+        max-width: 170px;
+    }
+    .phone-number{
+        display: none;
+    }
+}
+@media screen and (max-width: 500px) { 
+    .logo {
+        max-width: 140px;
+    }
+    .header-contacts .btn.btn-mini{
+        font-size: 13px;
+    }
+}
+@media screen and (max-width: 400px) { 
+    .header-panel {
+        padding: 15px 0;
+    }
+    .header-contacts .btn.btn-mini{
+        display: none;
+    }
+}
+
